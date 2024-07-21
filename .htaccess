@@ -1,0 +1,16 @@
+RewriteEngine On
+RewriteBase /ci/CodeIgniter-3.1.13/aplikasi_survey/
+
+# Menghapus index.php dari URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+# Jika Anda ingin menambahkan www atau mengarahkan HTTP ke HTTPS, tambahkan rule seperti ini:
+# Redirect non-www to www
+# RewriteCond %{HTTP_HOST} ^localhost:8080$
+# RewriteRule ^(.*)$ http://www.localhost:8080/$1 [R=301,L]
+
+# Redirect HTTP to HTTPS
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
