@@ -1,12 +1,15 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Dashboard extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
-        $this->load->model('Matakuliah_model');
         $this->load->model('Periode_model');
+        $this->load->model('Matakuliah_model');
+        $this->load->model('Mahasiswa_model');
     }
 
     public function index()
@@ -16,14 +19,14 @@ class Dashboard extends CI_Controller {
         $data['matakuliah_mahasiswa'] = $this->Matakuliah_model->get_data_matakuliah_mahasiswa();
         $data['all_periode'] = $this->Periode_model->get_data_all();
         $data['title'] = 'Home';
-        if($this->session->userdata('role_id') == 'mahasiswa'){
+        if ($this->session->userdata('role_id') == 'mahasiswa') {
             $data['content'] = 'dashboard/index';
-        }elseif($this->session->userdata('role_id') == 'admin'){
+        } elseif ($this->session->userdata('role_id') == 'admin') {
             $data['content'] = 'dashboard/index-admin';
-        }else{
+        } else {
             $data['content'] = 'dashboard/index';
         }
-        
+
         $this->load->view('layouts/main', $data);
     }
 }
