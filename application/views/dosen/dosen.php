@@ -5,10 +5,10 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h2 class="card-title">List Dosen</h2>
-                <!-- Button to add new dosen with icon -->
-                <a href="<?= base_url('dosen/add') ?>" class="btn btn-primary">
+                <!-- Button to trigger the modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDosenModal">
                     <i class="fas fa-plus"></i> Add
-                </a>
+                </button>
             </div>
             <div class="card-body">
                 <table id="mahasiswaTable" class="table table-rounded table-striped border gy-7 gs-7">
@@ -37,11 +37,41 @@
     </div>
 </div>
 
+<!-- Modal for Adding Dosen -->
+<div class="modal fade" id="addDosenModal" tabindex="-1" aria-labelledby="addDosenModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="<?= base_url('dosen/create') ?>" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addDosenModalLabel">Tambah Dosen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="namaDosen">Nama Dosen</label>
+                        <input type="text" class="form-control" id="namaDosen" name="nama_dosen" required>
+                    </div>
+                    <!-- Tambahkan field lainnya sesuai kebutuhan -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+<!-- Bootstrap JS for modal functionality -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Font Awesome JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
