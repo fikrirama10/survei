@@ -4,9 +4,9 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h2 class="card-title">List Mahasiswa</h2>
-                <!-- Button to add new mahasiswa with icon -->
-                <a href="<?= base_url('mahasiswa/add') ?>" class="btn btn-primary">
+                <h2 class="card-title">Periode Survey</h2>
+                <!-- Button to add new dosen with icon -->
+                <a href="<?= base_url('jadwal/add') ?>" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Add
                 </a>
             </div>
@@ -14,19 +14,22 @@
                 <table id="mahasiswaTable" class="table table-rounded table-striped border gy-7 gs-7">
                     <thead>
                         <tr class="fw-semibold fs-6 text-gray-300 border-bottom border-gray-200">
-                            <th>Nama</th>
-                            <th>NIM</th>
+                            <th style="width: 200px;">Periode</th> <!-- Set the width here -->
+                            <th style="width: 200px;">Tanggal</th> <!-- Set the width here -->
+                            <th style="width: 200px;">Status</th> <!-- Set the width here -->
+
                             <th>Action</th> <!-- Add action column -->
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($mahasiswa as $mhs) : ?>
+                        <?php foreach ($jadwal as $jdl) : ?>
                             <tr>
-                                <td><?= $mhs['nama_mahasiswa'] ?></td>
-                                <td><?= $mhs['npm'] ?></td>
+                                <td><?= $jdl['periode'] ?></td>
+                                <td><?= $jdl['tgl_periode'] ?></td>
+                                <td><?= $jdl['status_survey'] == 1 ? 'Aktif' : 'Tidak Aktif' ?></td>
                                 <td>
                                     <!-- Delete button with icon -->
-                                    <a href="<?= base_url('mahasiswa/delete/' . $mhs['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
+                                    <a href="<?= base_url('jadwal/delete/' . $jdl['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
