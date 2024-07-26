@@ -4,6 +4,7 @@ class Mahasiswa_model extends CI_Model
     public function __construct()
     {
         // Memanggil constructor CI_Model
+        $this->load->database();
         parent::__construct();
     }
 
@@ -13,5 +14,12 @@ class Mahasiswa_model extends CI_Model
         $this->db->from('mahasiswa');
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+
+
+    public function insert_mahasiswa($data)
+    {
+        return $this->db->insert('mahasiswa', $data);
     }
 }
