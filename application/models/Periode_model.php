@@ -5,6 +5,37 @@ class Periode_model extends CI_Model {
         parent::__construct();
     }
 
+    public function get_data_responden($idperiode) {
+        $sql = "
+        SELECT 
+           MAX(CASE WHEN pertanyaan_id = 62 THEN nilai_p END) AS 'P1',
+            MAX(CASE WHEN pertanyaan_id = 63 THEN nilai_p END) AS 'P2',
+            MAX(CASE WHEN pertanyaan_id = 64 THEN nilai_p END) AS 'P3',
+            MAX(CASE WHEN pertanyaan_id = 65 THEN nilai_p END) AS 'P4',
+            MAX(CASE WHEN pertanyaan_id = 66 THEN nilai_p END) AS 'P5',
+            MAX(CASE WHEN pertanyaan_id = 67 THEN nilai_p END) AS 'P6',
+            MAX(CASE WHEN pertanyaan_id = 68 THEN nilai_p END) AS 'P7',
+            MAX(CASE WHEN pertanyaan_id = 69 THEN nilai_p END) AS 'P8',
+            MAX(CASE WHEN pertanyaan_id = 70 THEN nilai_p END) AS 'P9',
+            MAX(CASE WHEN pertanyaan_id = 71 THEN nilai_p END) AS 'P10',
+            MAX(CASE WHEN pertanyaan_id = 72 THEN nilai_p END) AS 'P11',
+            MAX(CASE WHEN pertanyaan_id = 73 THEN nilai_p END) AS 'P12'
+        FROM 
+            jawaban_survei
+        WHERE 
+            periode_id = 1
+        GROUP BY 
+            mahasiswa_id
+        ORDER BY 
+            mahasiswa_id
+    ";
+    
+    
+
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
     public function get_data_ipa($idperiode) {
         $this->db->select('mahasiswa_id, SUM(nilai_i) AS total_nilai_i, SUM(nilai_p) AS total_nilai_p, AVG(nilai_i) AS avg_nilai_i, AVG(nilai_p) AS avg_nilai_p , pertanyaan_id');
         $this->db->from('jawaban_survei');

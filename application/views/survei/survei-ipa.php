@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row g-5" >
 	<div class="col-md-6">
-		<div class="card">
+		<div class="card card-stretch">
 			<div class="card-header">
 				<h2 class="card-title">Matakuliah</h2>
 			</div>
@@ -41,7 +41,7 @@
 	</div>
 
 	<div class="col-md-6">
-		<div class="card">
+		<div class="card card-stretch">
 			<div class="card-header">
 				<h2 class="card-title">Diagram</h2>
 			</div>
@@ -55,6 +55,66 @@
 						relying on color or 3D charts.
 					</p>
 				</figure>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row g-5">
+	<div class="col-md-6">
+		<div class="card card-stretch">
+			<div class="card-header">
+				<h3 class="card-title">Uji Validitas</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-rounded table-striped border gy-7 gs-7">
+					<thead>
+						<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+							<th>No Soal</th>
+							<th>Rxy</th>
+							<!-- <th>Rtable</th> -->
+							<th>Keterangan</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($korelasi as $index => $nilai): 
+							    if ($nilai > 0.10) {
+									$valid = 'Valid';
+								} else {
+									$valid = 'Tidak Valid';
+								}
+							?>
+						<tr>
+							<td><?= $index+1 ?></td>
+							<td><?=  $nilai ?></td>
+							<!-- <td></td> -->
+							<td><?= $valid ?></td>
+						</tr>
+						<?php endforeach; ?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card card-stretch">
+			<div class="card-header">
+				<h3 class="card-title">Uji Realibilitas</h3>
+			</div>
+			<div class="card-body">
+				<table class="table table-rounded table-striped border gy-7 gs-7">
+					<thead>
+						<tr class="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+							<th>Koefisien Realibilitas</th>
+							<th>Keterangan</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><?= round($realibilitas,3) ?></td>
+							<td>Tinggi</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -107,7 +167,7 @@
 					color: 'black',
 					dashStyle: 'dot',
 					width: 2,
-					value: '<?= $rata_x ?>' ,
+					value: '<?= $rata_x ?>',
 					label: {
 						rotation: 0,
 						y: 15,
@@ -137,7 +197,7 @@
 					color: 'black',
 					dashStyle: 'dot',
 					width: 2,
-					value: '<?= $rata_y ?>' ,
+					value: '<?= $rata_y ?>',
 					label: {
 						align: 'right',
 						style: {
@@ -174,7 +234,7 @@
 			},
 
 			series: [{
-				data: <?= json_encode($results_ipa_json) ?>,
+				data: <?= json_encode($results_ipa_json) ?> ,
 				colorByPoint: true
 			}]
 

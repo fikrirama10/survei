@@ -9,14 +9,14 @@ class Survei_model extends CI_Model {
         $result = array();
 
         // Query untuk pertanyaan dengan kategori 'Importance'
-        $importance_query = $this->db->where('importance', TRUE)->get('pertanyaan');
+        $importance_query = $this->db->where('importance', 2)->get('pertanyaan');
         $result['importance'] = $importance_query->result();
     
         // Mengatur ulang Query Builder untuk menjalankan query kedua
         $this->db->reset_query();
     
         // Query untuk pertanyaan dengan kategori 'Performance'
-        $performance_query = $this->db->where('importance', FALSE)->get('pertanyaan');
+        $performance_query = $this->db->where('importance', 0)->get('pertanyaan');
         $result['performance'] = $performance_query->result();
     
         // Mengembalikan hasil dari kedua query
