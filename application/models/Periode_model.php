@@ -5,6 +5,51 @@ class Periode_model extends CI_Model {
         parent::__construct();
     }
 
+    public function get_nilai_rata($idperiode) {
+        $sql = "
+       SELECT 
+    AVG(P1) AS avg_P1,
+    AVG(P2) AS avg_P2,
+    AVG(P3) AS avg_P3,
+    AVG(P4) AS avg_P4,
+    AVG(P5) AS avg_P5,
+    AVG(P6) AS avg_P6,
+    AVG(P7) AS avg_P7,
+    AVG(P8) AS avg_P8,
+    AVG(P9) AS avg_P9,
+    AVG(P10) AS avg_P10,
+    AVG(P11) AS avg_P11,
+    AVG(P12) AS avg_P12
+FROM (
+    SELECT 
+           MAX(CASE WHEN pertanyaan_id = 62 THEN nilai_p END) AS P1,
+            MAX(CASE WHEN pertanyaan_id = 63 THEN nilai_p END) AS P2,
+            MAX(CASE WHEN pertanyaan_id = 64 THEN nilai_p END) AS P3,
+            MAX(CASE WHEN pertanyaan_id = 65 THEN nilai_p END) AS P4,
+            MAX(CASE WHEN pertanyaan_id = 66 THEN nilai_p END) AS P5,
+            MAX(CASE WHEN pertanyaan_id = 67 THEN nilai_p END) AS P6,
+            MAX(CASE WHEN pertanyaan_id = 68 THEN nilai_p END) AS P7,
+            MAX(CASE WHEN pertanyaan_id = 69 THEN nilai_p END) AS P8,
+            MAX(CASE WHEN pertanyaan_id = 70 THEN nilai_p END) AS P9,
+            MAX(CASE WHEN pertanyaan_id = 71 THEN nilai_p END) AS P10,
+            MAX(CASE WHEN pertanyaan_id = 72 THEN nilai_p END) AS P11,
+            MAX(CASE WHEN pertanyaan_id = 73 THEN nilai_p END) AS P12
+    FROM 
+        jawaban_survei
+    WHERE 
+        periode_id = ".$idperiode."
+    GROUP BY 
+        mahasiswa_id
+) AS subquery
+
+    ";
+    
+    
+
+        $query = $this->db->query($sql);
+        $result = $query->result_array();
+        return $result;
+    }
     public function get_data_responden($idperiode) {
         $sql = "
         SELECT 
@@ -23,7 +68,7 @@ class Periode_model extends CI_Model {
         FROM 
             jawaban_survei
         WHERE 
-            periode_id = 1
+            periode_id = ".$idperiode."
         GROUP BY 
             mahasiswa_id
         ORDER BY 
@@ -49,13 +94,13 @@ class Periode_model extends CI_Model {
     }
     public function get_json_data_with_ipa($idperiode) {
         // Fetch the average data from the database
-        $ipa_data = $this->get_data_ipa($idperiode);
+        $ipa_data = $this->get_nilai_rata($idperiode);
         $data_with_averages = []; // Pastikan variabel ini didefinisikan
         $no=1;
-        foreach ($ipa_data as $average) {
+        foreach ($ipa_data[0] as $average) {
             $data = [];
-            $data['x'] = (float) $average->avg_nilai_i;
-            $data['y'] = (float) $average->avg_nilai_p;
+            $data['x'] = (float) $average;
+            $data['y'] = (float) $average;
             $data['name'] = $no++;
             $data_with_averages[] = $data; // Tambahkan data ke dalam array
         }

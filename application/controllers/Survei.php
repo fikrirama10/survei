@@ -102,6 +102,29 @@ function cronbach_alpha($responses)
 
     public function survei_ipa($id_periode) {
         //hasil IPA per periode
+        $data['get_nilai_rata'] = $this->Periode_model->get_nilai_rata($id_periode);
+        $values_rata = array();
+            foreach ($data['get_nilai_rata'] as $row) {
+                $values_rata[] = array_values($row);
+            }
+         $data['get_nilai_rata'] = $values_rata;
+         $data['nilai_importance'] = [
+            [
+                4,
+                3.8, 
+                3.8,
+                3.8, 
+                3.5, 
+                3.6, 
+                3.3,
+                3, 
+                2, 
+                4,
+                3.7,
+                3.8
+            ]
+         ];
+        //  return print_r($data['get_nilai_rata'][0]);
         $data['results_ipa'] = $this->Periode_model->get_data_ipa($id_periode);
         $data['results_ipa_json'] = $this->Periode_model->get_json_data_with_ipa($id_periode);
         $dataResponden = $this->Periode_model->get_data_responden($id_periode);

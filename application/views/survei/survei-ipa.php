@@ -1,4 +1,4 @@
-<div class="row g-5" >
+<div class="row g-5">
 	<div class="col-md-6">
 		<div class="card card-stretch">
 			<div class="card-header">
@@ -11,29 +11,30 @@
 							<th>No</th>
 							<th>Importance</th>
 							<th>Perpormance</th>
-							<th>X</th>
-							<th>Y</th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php $total_x = 0; $total_y=0; $no=1; foreach($results_ipa as $ri): 
-                            $total_x += $ri->avg_nilai_i;
-                            $total_y += $ri->avg_nilai_p;
+						<?php $total_x = 0; $total_y=0; $no=1; foreach($get_nilai_rata[0] as  $key => $val): 
+							// $val =array_values($values);
+                            $total_x += $nilai_importance[0][$key];
+                            $total_y +=$val;
                             ?>
 						<tr>
 							<td><?= $no++ ?></td>
-							<td><?= $ri->total_nilai_i?></td>
-							<td><?= $ri->total_nilai_p?></td>
-							<td><?= $ri->avg_nilai_i?></td>
-							<td><?= $ri->avg_nilai_p?></td>
+							<td><?=$nilai_importance[0][$key]?></td>
+							<td><?=$val?></td>
 						</tr>
+						
 						<?php endforeach;
-                        if(count($results_ipa) > 0){
-                            $rata_x = $total_x / count($results_ipa);
-                            $rata_y = $total_y / count($results_ipa);
+						
+                        if(count($get_nilai_rata[0]) > 0){
+                            $rata_x = $total_x / count($nilai_importance[0]);
+                            $rata_y = $total_y / count($get_nilai_rata[0]);
                         }
                         
                         ?>
+						<?= $total_x/ count($nilai_importance[0]);  ?>
+						<?= $total_y/ count($get_nilai_rata[0]);  ?>
 					</tbody>
 				</table>
 			</div>
